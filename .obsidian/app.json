@@ -1,0 +1,19 @@
+{
+  "promptDelete": true,
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "pdfExportSettings": {
+    "includeName": true,
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  },
+  "readableLineLength": true,
+  "showInlineTitle": true,
+  "strictLineBreaks": false,
+  "showIndentGuide": false,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "private",
+  "attachmentFolderPath": "./"
+}

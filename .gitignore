@@ -1,0 +1,18 @@
+# Personal Obsidian state
+.obsidian/workspace*.json
+.obsidian/bookmarks.json
+.obsidian/graph.json
+
+# Per-user plugin data (logins, tokens)
+.obsidian/plugins/system3-relay/data.json
+
+# Private notes
+private/*
+!private/.gitkeep
+
+# Granola meeting notes (private)
+granola/
+
+# System
+.trash/
+.DS_Store
