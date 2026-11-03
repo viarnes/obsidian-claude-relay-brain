@@ -1,0 +1,58 @@
+filters:
+  and:
+    - file.folder == "public/initiatives"
+    - file.ext == "md"
+formulas:
+  light: if(status == "Ongoing", "🟢", if(status == "Waiting", "🟡", if(status == "Stopped", "🔴", "⚪")))
+properties:
+  order:
+    displayName: "#"
+  file.name:
+    displayName: Initiative
+  subtitle:
+    displayName: Detail
+  owner:
+    displayName: Owner
+  update:
+    displayName: Update
+  formula.light:
+    displayName: " "
+  updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Initiatives
+    order:
+      - order
+      - formula.light
+      - status
+      - file.name
+      - subtitle
+      - owner
+      - update
+      - updated
+    sort:
+      - property: order
+        direction: ASC
+  - type: table
+    name: By status
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - owner
+      - update
+      - formula.light
+    sort:
+      - property: order
+        direction: ASC
+  - type: table
+    name: By owner
+    groupBy:
+      property: owner
+      direction: ASC
+    order:
+      - file.name
+      - update
+      - formula.light

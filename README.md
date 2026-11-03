@@ -2,7 +2,8 @@
 A boilerplate for a collaborative Obsidian vault that works as a team's shared brain, built to be used with Claude Code.
 
 - **Private and public notes.** Everything in `private/` is just for you. Everything in `public/` is shared with your team through Relay.
-- **Shared rules for Claude.** The base `CLAUDE.md` points to the shared guidelines in `public/GUIDELINES.md`, so everyone's Claude follows the same conventions. It also loads `MEMORY.md`, your private list of relevant nodes.
+- **Shared rules for Claude.** The base `CLAUDE.md` points to the shared guidelines in `public/GUIDELINES.md`, so everyone's Claude follows the same conventions. It also loads `MEMORY.md`, your private list of relevant nodes, and `WHOAMI.md`, where you tell Claude who you are.
+- **Tasks, initiatives and providers.** One note each, in `public/tasks/`, `public/initiatives/` and `public/providers/`, listed by Obsidian Bases: `public/TODO.base` (team tasks), `TODO.base` (your private tasks plus the team tasks you own), `INITIATIVES.base` and `PROVIDERS.base`.
 - **Best with Claude Code.** Open Claude Code in the vault folder and ask things like:
   - "Summarize this week's meetings with X"
   - "Add a to-do for Y"
@@ -13,14 +14,17 @@ A boilerplate for a collaborative Obsidian vault that works as a team's shared b
 # Setup
 1. **Get your copy.** Click **Use this template** on GitHub (or download the ZIP). Don't `git clone` this repo: your vault would keep it as its remote.
 2. **Open it in Obsidian.** Choose "Open folder as vault" and pick the folder. When Obsidian asks, click **Trust author and enable plugins**.
-3. **Make [INDEX](INDEX.md) your home.** It's your private map of the vault: link your hot nodes, to-dos and anything else you want at hand. Pin it (or delete it).
-4. **Personalize `CLAUDE.md`.** Add any instructions you want Claude to follow when working with you. Shared rules belong in `public/GUIDELINES.md` instead.
-5. **Set up Relay with your teammates** (see below).
+3. **Turn on the Obsidian CLI** in Obsidian's settings. Claude creates and edits notes through it, with Obsidian open: Relay garbles changes written straight to disk.
+4. **Make [INDEX](INDEX.md) your home.** It's your private map of the vault: link your hot nodes, to-dos and anything else you want at hand. Pin it (or delete it). The team's home is `public/INDEX.md`.
+5. **Tell Claude who you are.** Fill in [WHOAMI](WHOAMI.md), and replace `Your Name` in `TODO.base` with your name so it lists the team tasks you own.
+6. **Personalize `CLAUDE.md`.** Add any instructions you want Claude to follow when working with you. Shared rules belong in `public/GUIDELINES.md` instead.
+7. **Set up Relay with your teammates** (see below).
 # Working with your team
 - The **Relay** plugin comes installed. Sign in from its settings, then one person shares the `public/` folder and invites the rest.
 - Keep anything personal or sensitive in `private/`. It isn't shared with your team (Claude still reads it when you work with it).
 - To share a note, move it from `private/` to `public/` (inside Obsidian, so links update).
 - Only `public/` syncs. Changes to skills, `CLAUDE.md` or Obsidian settings have to be shared by hand.
+- Relay only syncs edits reliably when they're made in Obsidian. Edit `public/` notes inside Obsidian (Claude does it through the Obsidian CLI), not with scripts or other editors.
 # Syncing to GitHub (optional)
 Relay already keeps everyone in sync, so you only need GitHub if you want version history or to use the brain with Claude remotely.
 

@@ -1,0 +1,61 @@
+filters:
+  and:
+    - file.inFolder("public/tasks")
+    - file.ext == "md"
+formulas:
+  days: if(due, (date(due) - today()).days, "")
+  alert: if(!due, "", if(date(due) < today(), "🔴 Overdue", if(date(due) == today(), "🟡 Today", "")))
+properties:
+  file.name:
+    displayName: Task
+  status:
+    displayName: Status
+  owner:
+    displayName: Owner
+  due:
+    displayName: Due
+  initiative:
+    displayName: Initiative
+  people:
+    displayName: People
+  formula.days:
+    displayName: Days
+  formula.alert:
+    displayName: Alert
+views:
+  - type: table
+    name: Open
+    filters:
+      and:
+        - status != "Done"
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - owner
+      - initiative
+      - due
+      - formula.alert
+  - type: table
+    name: By owner
+    filters:
+      and:
+        - status != "Done"
+    groupBy:
+      property: owner
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - due
+      - formula.alert
+  - type: table
+    name: Done
+    filters:
+      and:
+        - status == "Done"
+    order:
+      - file.name
+      - owner
+      - initiative

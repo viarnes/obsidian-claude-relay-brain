@@ -1,0 +1,122 @@
+filters:
+  and:
+    - file.ext == "md"
+    - or:
+        - and:
+            - file.inFolder("private")
+            - file.hasProperty("status")
+        - and:
+            - file.inFolder("public/tasks")
+            - owner.toString().contains("Your Name")
+formulas:
+  days: if(due, (date(due) - today()).days, "")
+  alert: if(!due, "", if(date(due) < today(), "🔴 Overdue", if(date(due) == today(), "🟡 Today", "")))
+  where: if(file.inFolder("public"), "Public", "Private")
+properties:
+  file.name:
+    displayName: Task
+  status:
+    displayName: Status
+  due:
+    displayName: Due
+  initiative:
+    displayName: Initiative
+  people:
+    displayName: People
+  formula.days:
+    displayName: Days
+  formula.alert:
+    displayName: Alert
+  formula.where:
+    displayName: Where
+views:
+  - type: table
+    name: In Progress
+    filters:
+      and:
+        - status == "In Progress"
+    order:
+      - file.name
+      - initiative
+      - people
+      - due
+      - formula.where
+    sort:
+      - property: due
+        direction: ASC
+  - type: table
+    name: Next up
+    filters:
+      and:
+        - status == "Next up"
+    order:
+      - formula.alert
+      - file.name
+      - due
+      - initiative
+      - people
+      - formula.where
+    sort:
+      - property: due
+        direction: ASC
+  - type: table
+    name: Backlog
+    filters:
+      and:
+        - status == "Backlog"
+    order:
+      - formula.alert
+      - file.name
+      - due
+      - initiative
+      - people
+      - formula.where
+    sort:
+      - property: due
+        direction: ASC
+  - type: table
+    name: Next 7 days
+    filters:
+      and:
+        - status != "Done"
+        - due
+        - date(due) <= today() + "7d"
+    order:
+      - formula.alert
+      - file.name
+      - status
+      - due
+      - formula.days
+      - initiative
+      - formula.where
+    sort:
+      - property: due
+        direction: ASC
+  - type: table
+    name: By initiative
+    filters:
+      and:
+        - status != "Done"
+    groupBy:
+      property: initiative
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - due
+      - people
+      - formula.where
+  - type: table
+    name: Done
+    filters:
+      and:
+        - status == "Done"
+    order:
+      - file.name
+      - initiative
+      - people
+      - file.mtime
+      - formula.where
+    sort:
+      - property: file.mtime
+        direction: DESC

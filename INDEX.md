@@ -1,1 +1,5 @@
-Hello! This note is a placeholder for your private home in the vault. Edit it to make it yours.
+Your private home in the vault. Edit it to make it yours. Team home: [[public/INDEX|Team INDEX]].
+# Personal tasks
+[[TODO.base|TODO]]
+# Team tasks
+[[public/TODO.base|TODO]]

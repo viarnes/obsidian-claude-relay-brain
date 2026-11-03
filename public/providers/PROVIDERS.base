@@ -1,0 +1,47 @@
+filters:
+  and:
+    - file.folder == "public/providers"
+    - file.ext == "md"
+formulas:
+  light: if(status == "Active", "🟢", if(status == "Evaluating", "🟡", if(status == "Paused", "🔴", "⚪")))
+properties:
+  file.name:
+    displayName: Provider
+  formula.light:
+    displayName: " "
+  status:
+    displayName: Status
+  owner:
+    displayName: Owner
+  initiative:
+    displayName: Initiatives
+views:
+  - type: table
+    name: Providers
+    order:
+      - formula.light
+      - status
+      - file.name
+      - owner
+      - initiative
+    sort:
+      - property: file.name
+        direction: ASC
+  - type: table
+    name: By status
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - owner
+      - initiative
+  - type: table
+    name: By owner
+    groupBy:
+      property: owner
+      direction: ASC
+    order:
+      - file.name
+      - formula.light
+      - initiative
