@@ -1,0 +1,77 @@
+/* Bases kanban: wrap card titles instead of truncating.
+   Kanban positions cards absolutely with JS-computed heights, so switch to normal flow. */
+.bases-kanban-column-inner {
+  height: auto !important;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bases-kanban-card {
+  position: relative !important;
+  top: auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+  contain: none !important;
+  display: flex;
+  flex-direction: column;
+}
+.bases-kanban-card-property {
+  position: relative !important;
+  top: auto !important;
+  height: auto !important;
+}
+.bases-kanban-card-line {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  height: auto;
+  line-height: 1.3;
+}
+/* Scroll the whole column instead of its content, so the virtualizer sees all cards as visible
+   (otherwise it unloads cards on scroll and the column jumps back to the top) */
+.bases-kanban-column {
+  overflow-y: auto !important;
+}
+.bases-kanban-column-content {
+  flex: none !important;
+  overflow: visible !important;
+}
+.bases-kanban-column-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: color-mix(in srgb, var(--kanban-col, transparent) 10%, var(--background-primary));
+}
+
+/* Hide property labels (eg: "owner") on cards */
+.bases-kanban-card-label {
+  display: none !important;
+}
+
+/* Color columns with the theme palette, keyed by their fixed horizontal offset
+   (12px + 288px per column at the default 280px width). Off-screen columns are removed
+   from the DOM, so nth-child would shift colors while scrolling horizontally. */
+.bases-kanban-column[style*="start: 12px;"]   { --kanban-col: var(--color-blue); }
+.bases-kanban-column[style*="start: 300px;"]  { --kanban-col: var(--color-orange); }
+.bases-kanban-column[style*="start: 588px;"]  { --kanban-col: var(--color-purple); }
+.bases-kanban-column[style*="start: 876px;"]  { --kanban-col: var(--color-green); }
+.bases-kanban-column[style*="start: 1164px;"] { --kanban-col: var(--color-red); }
+.bases-kanban-column[style*="start: 1452px;"] { --kanban-col: var(--color-cyan); }
+.bases-kanban-column[style*="start: 1740px;"] { --kanban-col: var(--color-yellow); }
+.bases-kanban-column[style*="start: 2028px;"] { --kanban-col: var(--color-pink); }
+.bases-kanban-column[style*="start: 2316px;"] { --kanban-col: var(--color-blue); }
+.bases-kanban-column[style*="start: 2604px;"] { --kanban-col: var(--color-orange); }
+.bases-kanban-column[style*="start: 2892px;"] { --kanban-col: var(--color-purple); }
+.bases-kanban-column[style*="start: 3180px;"] { --kanban-col: var(--color-green); }
+.bases-kanban-column[style*="start: 3468px;"] { --kanban-col: var(--color-red); }
+.bases-kanban-column[style*="start: 3756px;"] { --kanban-col: var(--color-cyan); }
+.bases-kanban-column[style*="start: 4044px;"] { --kanban-col: var(--color-yellow); }
+.bases-kanban-column[style*="start: 4332px;"] { --kanban-col: var(--color-pink); }
+.bases-kanban-column {
+  background-color: color-mix(in srgb, var(--kanban-col, transparent) 10%, transparent) !important;
+  border-color: color-mix(in srgb, var(--kanban-col, transparent) 40%, transparent) !important;
+}
+.bases-kanban-column-header .bases-group-value,
+.bases-kanban-column-header .value-list-element {
+  color: var(--kanban-col, inherit);
+}
